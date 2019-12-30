@@ -1,11 +1,11 @@
-package com.example.eventorganisator.ui.Login;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.ric.ui.Login;
 
 import android.os.Bundle;
 
-import com.example.eventorganisator.R;
-import com.example.eventorganisator.ui.Login.ui.login.LoginFragment;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.ric.R;
+import com.example.ric.domain.DAOBase;
 
 public class LoginActivity extends AppCompatActivity {
 

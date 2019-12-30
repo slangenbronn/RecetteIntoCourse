@@ -1,4 +1,4 @@
-package com.example.ric.ui.Login.ui.login;
+package com.example.ric.ui.Login;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 import com.example.ric.domain.User;
 import com.example.ric.R;
 import com.example.ric.MyApplication;
+import com.example.ric.domain.UserDAO;
 
 public class RegisterFragment extends Fragment {
 
@@ -44,6 +45,7 @@ public class RegisterFragment extends Fragment {
         final EditText emailEditText = getView().findViewById(R.id.emailEditText);
         final Button registerButton = getView().findViewById(R.id.registerButton);
         final TextView errorName = getView().findViewById(R.id.errorName);
+        final TextView errorNameExist = getView().findViewById(R.id.errorNameExist);
         final TextView errorMail = getView().findViewById(R.id.errorEmail);
         final TextView errorPassword = getView().findViewById(R.id.errorPassword);
         final Button backButton = getView().findViewById(R.id.backButton);
@@ -80,12 +82,28 @@ public class RegisterFragment extends Fragment {
                     errorPassword.setVisibility(View.INVISIBLE);
                 }
 
+                UserDAO ud = new UserDAO(MyApplication.getAppContext());
+                ud.open();
+                User userVerif = ud.selectionerUserName(username);
+                ud.close();
+
+                if(userVerif != null){
+                    errorNameExist.setVisibility(View.VISIBLE);
+                    allgood = false;
+                }
+                else{
+                    errorNameExist.setVisibility(View.INVISIBLE);
+                }
+
                 if(allgood){
-                    User u = new User(username, email, password);
-                    MyApplication.getInstance().addUser(u);
-                    LoginFragment fragment2 = new LoginFragment();
+                    LoginFragment loginFragment = new LoginFragment();
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.container, fragment2, "ReplaceFragment").commit();
+                    fragmentManager.beginTransaction().replace(R.id.container, loginFragment, "ReplaceFragment").commit();
+
+                    User u = new User(1, username, email, password);
+                    ud.open();
+                    ud.ajouter(u);
+                    ud.close();
                 }
             }
         });
@@ -93,9 +111,9 @@ public class RegisterFragment extends Fragment {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginFragment fragment2 = new LoginFragment();
+                LoginFragment loginFragment = new LoginFragment();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.container, fragment2, "ReplaceFragment").commit();
+                fragmentManager.beginTransaction().replace(R.id.container, loginFragment, "ReplaceFragment").commit();
             }
         });
     }

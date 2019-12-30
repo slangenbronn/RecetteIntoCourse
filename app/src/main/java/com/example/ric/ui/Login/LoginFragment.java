@@ -1,4 +1,4 @@
-package com.example.ric.ui.Login.ui.login;
+package com.example.ric.ui.Login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +20,7 @@ import com.example.ric.MainActivity;
 import com.example.ric.MyApplication;
 import com.example.ric.R;
 import com.example.ric.domain.User;
+import com.example.ric.domain.UserDAO;
 
 import java.util.List;
 
@@ -52,16 +53,18 @@ public class LoginFragment extends Fragment {
                 boolean userFound = false;
                 String username = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                List<User> userList = MyApplication.getUserList();
+
+                //List<User> userList = MyApplication.getUserList();
                 if(username != "" && password != "" && password.length() > 5){
-                    for(int i = 0; i < userList.size(); i++){
-                        User u = userList.get(i);
-                        if(u.getName().equals(username) && u.getPassword().equals(password)){
-                            Intent intent = new Intent(getContext().getApplicationContext(), MainActivity.class);
-                            startActivity(intent);
-                            getActivity().finish();
-                            userFound = true;
-                        }
+                    UserDAO ud = new UserDAO(MyApplication.getAppContext());
+                    ud.open();
+                    User u = ud.selectionerUserName(username);
+                    ud.close();
+                    if(u.getName().equals(username) && u.getPassword().equals(password)){
+                        Intent intent = new Intent(getContext().getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        getActivity().finish();
+                        userFound = true;
                     }
 
                     if(!userFound){
