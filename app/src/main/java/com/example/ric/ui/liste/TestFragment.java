@@ -23,8 +23,6 @@ public class TestFragment extends Fragment {
             "Neptune",
     };
 
-    private ListView listView;
-
 
     public TestFragment() { }
 
@@ -35,6 +33,11 @@ public class TestFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.test_list_fragment, container, false);
+        View v = inflater.inflate(R.layout.test_list_fragment, container, false);
+        CustomListAdapter whatever = new CustomListAdapter(getActivity(), planetArray);
+        final ListView listView;
+        listView = (ListView) v.findViewById(R.id.ListViewID);
+        listView.setAdapter(whatever);
+        return v;
     }
 }
