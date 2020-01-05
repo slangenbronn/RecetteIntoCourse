@@ -36,7 +36,7 @@ public class TestFragment extends Fragment {
         View v = inflater.inflate(R.layout.test_list_fragment, container, false);
         CustomListAdapter whatever = new CustomListAdapter(getActivity(), planetArray);
         final ListView listView;
-        listView = (ListView) v.findViewById(R.id.ListViewID);
+        listView = (ListView) v.findViewById(R.id.listViewID);
         listView.setAdapter(whatever);
         return v;
     }

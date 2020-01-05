@@ -11,7 +11,7 @@
         android:text="Jean michel" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ListViewID"
+        android:id="@+id/listViewID"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
