@@ -24,6 +24,12 @@
         tools:layout="@layout/fragment_to_list" />
 
     <fragment
+        android:id="@+id/nav_test_fragment"
+        android:name="com.example.ric.ui.liste.TestFragment"
+        android:label="@string/liste_course"
+        tools:layout="@layout/test_list_fragment" />
+
+    <fragment
         android:id="@+id/nav_autre_fragment"
         android:name="com.example.ric.ui.liste.TempFragment"
         android:label="@string/autre_fragment"

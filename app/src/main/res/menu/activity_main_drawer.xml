@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/liste_course" />
         <item
+            android:id="@+id/nav_test_fragment"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Test" />
+        <item
             android:id="@+id/nav_autre_fragment"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/autre_fragment" />
