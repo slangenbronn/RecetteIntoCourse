@@ -18,6 +18,18 @@
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
+        android:id="@+id/nav_liste_course"
+        android:name="com.example.ric.ui.liste.ToListFragment"
+        android:label="@string/liste_course"
+        tools:layout="@layout/fragment_to_list" />
+
+    <fragment
+        android:id="@+id/nav_autre_fragment"
+        android:name="com.example.ric.ui.liste.TempFragment"
+        android:label="@string/autre_fragment"
+        tools:layout="@layout/fragment_temp" />
+
+    <fragment
         android:id="@+id/nav_slideshow"
         android:name="com.example.ric.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
