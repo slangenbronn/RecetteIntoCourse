@@ -1,11 +1,11 @@
 package com.example.ric.ui.Login;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ric.R;
-import com.example.ric.domain.DAOBase;
 
 public class LoginActivity extends AppCompatActivity {
 

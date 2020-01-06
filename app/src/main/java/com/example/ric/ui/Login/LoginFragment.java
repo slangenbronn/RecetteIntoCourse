@@ -2,6 +2,7 @@ package com.example.ric.ui.Login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
         return new LoginFragment();
     }
+    public SharedPreferences pref;
 
     @Nullable
     @Override
@@ -44,8 +46,14 @@ public class LoginFragment extends Fragment {
         final EditText usernameEditText = getView().findViewById(R.id.username);
         final EditText passwordEditText = getView().findViewById(R.id.password);
         final Button loginButton = getView().findViewById(R.id.login);
-        final ProgressBar loadingProgressBar = getView().findViewById(R.id.loading);
         final Button registerButton = getView().findViewById(R.id.register_label);
+
+        pref = getActivity().getSharedPreferences("LOGIN", Context.MODE_PRIVATE);
+
+        if(pref.contains("NAME") && pref.contains("PSW")){
+            usernameEditText.setText(pref.getString("NAME", null));
+            passwordEditText.setText(pref.getString("PSW", null));
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +69,7 @@ public class LoginFragment extends Fragment {
                     User u = ud.selectionerUserName(username);
                     ud.close();
                     if(u.getName().equals(username) && u.getPassword().equals(password)){
+                        pref.edit().putString("NAME", username).putString("PSW", password).apply();
                         Intent intent = new Intent(getContext().getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         getActivity().finish();
