@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -15,7 +17,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.ric.AloneActivity;
+import com.example.ric.MyApplication;
 import com.example.ric.R;
+import com.example.ric.domain.Liste;
+import com.example.ric.domain.ListeDAO;
+import com.example.ric.domain.User;
+import com.example.ric.domain.UserDAO;
 
 public class HomeFragment extends Fragment {
 
@@ -34,17 +41,39 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+        final EditText listeNameText = root.findViewById(R.id.listNameText);
         final Button aloneButton = root.findViewById(R.id.button_alone);
         aloneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AloneActivity.class);
-                // Transfert des données
-                intent.putExtra("phrase", "Je suis une belle phrase passée à l'autre activité :D");
 
-                // Change d'activité
-                getActivity().startActivity(intent);
-                getActivity().finish();
+                if("".compareTo(listeNameText.getText().toString()) == 0) {
+                    String message = "Le champ doit être rempli ! :(";
+                    Toast.makeText(getActivity(), message,Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intent = new Intent(getActivity(), AloneActivity.class);
+                    // Transfert des données
+                    intent.putExtra("phrase", listeNameText.getText().toString());
+
+                    ListeDAO ld = new ListeDAO(MyApplication.getAppContext());
+                    ld.open();
+                    Liste newListe = new Liste(1, listeNameText.getText().toString());
+                    ld.ajouter(newListe);
+                    ld.close();
+
+                    intent.putExtra("liste_name", newListe.getName());
+
+                    if(newListe == null){
+                        Toast.makeText(getActivity(), "Ca a pas marché :D",Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        // Change d'activité
+                        getActivity().startActivity(intent);
+                        getActivity().finish();
+                    }
+                }
             }
         });
 

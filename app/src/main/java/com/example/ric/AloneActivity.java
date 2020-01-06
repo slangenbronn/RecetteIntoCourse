@@ -3,6 +3,8 @@ package com.example.ric;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.ric.domain.Liste;
+import com.example.ric.domain.ListeDAO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -32,8 +34,17 @@ public class AloneActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         String text = i.getStringExtra("phrase");
+        String liste_name = i.getStringExtra("liste_name");
+
+        ListeDAO ld = new ListeDAO(MyApplication.getAppContext());
+        ld.open();
+        Liste newListe = ld.selectionerListeName(liste_name);
+        ld.close();
+
+
         TextView phrase = findViewById(R.id.phrase_passe);
-        phrase.setText(text);
+        phrase.setText("Le nom de la nouvelle liste est :\n" + newListe.getName());
+//        phrase.setText(text);
     }
 
 }
