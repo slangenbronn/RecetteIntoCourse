@@ -97,7 +97,7 @@ public class RecetteFragment extends Fragment {
                     rd.close();
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext(), "default");
-                    builder.setSmallIcon(R.drawable.ic_launcher_background);
+                    builder.setSmallIcon(R.drawable.ic_bookmarks_24px);
                     builder.setContentTitle("Nouvelle recette disponible");
                     builder.setContentText(r.getName());
                     NotificationManager
