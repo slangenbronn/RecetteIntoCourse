@@ -6,7 +6,7 @@ import android.database.Cursor;
 
 public class UserDAO extends DAOBase {
 
-    public static final String TABLE_NAME = "user";
+    public static final String TABLE_NAME = "User";
     public static final String KEY = "id";
     public static final String NAME = "name";
     public static final String EMAIL = "email";

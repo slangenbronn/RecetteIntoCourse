@@ -1,16 +1,16 @@
-package com.example.ric.ui.gallery;
+package com.example.ric.ui.recette;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class RecetteViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public RecetteViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("Ajouter une recette");
     }
 
     public LiveData<String> getText() {
