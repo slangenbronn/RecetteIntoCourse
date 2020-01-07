@@ -30,6 +30,8 @@
     <string name="autre_fragment">Autre Fragment</string>
     <string name="to_list">Vers les listes</string>
 
+    <string name="go_to_modify">Modifier le profil</string>
+
 
     <string-array name="Planets">
         <item>Sun</item>
